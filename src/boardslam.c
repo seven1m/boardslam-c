@@ -2,25 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef enum {
-  Add,
-  Subtract,
-  Multiply,
-  Divide
-} Op;
-
-typedef struct {
-  int number;
-  int power;
-} Value;
-
-typedef struct {
-  Value x;
-  Op op1;
-  Value y;
-  Op op2;
-  Value z;
-} Answer;
+#include "boardslam.h"
 
 int op(int n1, Op op, int n2) {
   float r;
@@ -68,18 +50,7 @@ void sprintval(char *buf, Value val) {
   }
 }
 
-int main(int argc, char *argv[]) {
-  if (argc < 4) {
-    printf("You must supply 3 numbers.\n");
-    return 1;
-  }
-  int n1 = atoi(argv[1]);
-  int n2 = atoi(argv[2]);
-  int n3 = atoi(argv[3]);
-  if (n1 < 1 || n1 > 6 || n2 < 1 || n2 > 6 || n3 < 1 || n3 > 6) {
-    printf("You must supply 3 numbers, each between 1 and 6.\n");
-    return 2;
-  }
+Answer* boardslam_results(int n1, int n2, int n3) {
   Op ops[] = { Add, Subtract, Multiply, Divide };
   int permutations[] = {
     n1, n2, n3,
@@ -90,7 +61,7 @@ int main(int argc, char *argv[]) {
     n3, n2, n1,
   };
   int powers[] = { 1, 0, 2, 3 };
-  Answer answers[36] = { 0 };
+  Answer *answers = calloc(36, sizeof(Answer));
   for (size_t op1i=0; op1i<4; op1i++) {
     Op op1 = ops[op1i];
     for (size_t op2i=0; op2i<4; op2i++) {
@@ -122,27 +93,6 @@ int main(int argc, char *argv[]) {
       }
     }
   }
-  for (size_t i=0; i<36; i++) {
-    if (answers[i].x.number != 0) {
-      char x_buf[10], y_buf[10], z_buf[10], op1_buf[2], op2_buf[2];
-      sprintval(x_buf, answers[i].x);
-      sprintval(y_buf, answers[i].y);
-      sprintval(z_buf, answers[i].z);
-      sprintop(op1_buf, answers[i].op1);
-      sprintop(op2_buf, answers[i].op2);
-      printf("%s %s %s %s %s = %lu\n", x_buf, op1_buf, y_buf, op2_buf, z_buf, i+1);
-    }
-  }
-  printf("\nmissing: ");
-  int comma = 0;
-  for (size_t i=0; i<36; i++) {
-    if (answers[i].x.number == 0) {
-      if (comma) printf(", ");
-      comma = 1;
-      printf("%lu", i+1);
-    }
-  }
-  printf("\n");
-  return 0;
+  return answers;
 }
 
