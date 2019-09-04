@@ -119,6 +119,13 @@ int main() {
       print_form(0, 0, 0);
     }
   }
-  printf("</body></html>");
+  printf(
+    "<hr>"
+    "<p><i>Hosting for this site is provided by</i></p>"
+    "<p><a href='http://sdf.org'><img src='https://sdf.org/sdfbanner.png'></a></p>"
+    "<p><a href='http://sdf.org'>The SDF Public Access UNIX System</a></p>"
+    "<p><a href='http://validator.w3.org/check?uri=http://seven1m.sdf.org/experiments/boardslam.cgi'><img src='https://www.w3.org/Icons/valid-html20'></a></p>"
+    "</body></html>"
+  );
   return 0;
 }
