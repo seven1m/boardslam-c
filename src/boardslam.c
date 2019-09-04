@@ -60,7 +60,7 @@ Answer* boardslam_results(int n1, int n2, int n3) {
     n3, n1, n2,
     n3, n2, n1,
   };
-  int powers[] = { 1, 0, 2, 3 };
+  int powers[] = { 1, 0, 2, 3, 4 };
   Answer *answers = calloc(36, sizeof(Answer));
   for (size_t op1i=0; op1i<4; op1i++) {
     Op op1 = ops[op1i];
@@ -70,13 +70,13 @@ Answer* boardslam_results(int n1, int n2, int n3) {
         int n1 = permutations[ni];
         int n2 = permutations[ni+1];
         int n3 = permutations[ni+2];
-        for (size_t xpi=0; xpi<4; xpi++) {
+        for (size_t xpi=0; xpi<5; xpi++) {
           int xpow = powers[xpi];
           int x = pow(n1, xpow);
-          for (size_t ypi=0; ypi<4; ypi++) {
+          for (size_t ypi=0; ypi<5; ypi++) {
             int ypow = powers[ypi];
             int y = pow(n2, ypow);
-            for (size_t zpi=0; zpi<4; zpi++) {
+            for (size_t zpi=0; zpi<5; zpi++) {
               int zpow = powers[zpi];
               int z = pow(n3, zpow);
               int result = op(op(x, op1, y), op2, z);

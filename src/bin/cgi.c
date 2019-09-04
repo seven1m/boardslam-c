@@ -59,7 +59,7 @@ int main() {
           "page, it will tell you which answers seem to be impossible (if any)."
         "</p>"
         "<p>"
-          "This tool only tries powers up to 3 and does not attempt fractional exponents. "
+          "This tool only tries powers up to 4 and does not attempt fractional exponents. "
           "The sourcecode <a href='https://github.com/seven1m/boardslam-c'>is available</a> in case you want to help improve it!"
         "</p>"
   );
